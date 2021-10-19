@@ -132,7 +132,7 @@ Our team’s Git workflow for coding tasks will be as follows:
 
 ### Links to other mid prep docs
 
-- [401 Mid prep #1](401_Mid_Prep_1.md)
+- [401 Mid prep #1](team-agreement.md)
 - [401 Mid Prep #2](401_Mid_Prep_2.md)
 - [401 Mid Prep #3](401_Mid_Prep_3.md)
 - [401 Mid Prep #4](401_Mid_Prep_4.md)
