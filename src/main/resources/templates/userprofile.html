@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!--<div th:each="user : ${applicationUser}">-->
+<!--    <h1>User Information: Admin page only</h1>-->
+<!--    <img th:src="" alt="User's Picture">-->
+<!--    <ul>-->
+<!--        <li th:text="${user.firstName}">First Name</li>-->
+<!--        <li th:text="${user.lastName}">Last Name</li>-->
+<!--        <li th:text="${user.dateOfBirth}">Date of Birth</li>-->
+<!--        <li th:text="${user.bio}">Bio</li>-->
+<!--    </ul>-->
+<!--</div>-->
+
+<!--<h1  th:text="${username}">Specific Name : Lucy</h1>-->
+
+<!--<div th:each="user : ${applicationUser}">-->
+<!--    <h1>User Information</h1>-->
+<!--    <h2 th:text="'welcome' + ${user.username}"></h2>-->
+<!--    <img th:src="" alt="User's Picture">-->
+<!--    <ul>-->
+<!--        <li th:text="${user.firstName}">First Name</li>-->
+<!--        <li th:text="${user.lastName}">Last Name</li>-->
+<!--        <li th:text="${user.dateOfBirth}">Date of Birth</li>-->
+<!--    </ul>-->
+<!--</div>-->
+
+
+<!--<h2 th:if="${visitor}" th:text="${visitor.user}"> Welcome to my bio and posts</h2>-->
+
+
+
+<form action="/following" method="post">
+    <fieldset>
+        <legend>Add Follower</legend>
+        <label for="name">
+            Name
+            <input id="name" type="text" name="name">
+        </label>
+
+        <input type="submit" value="add follower">
+    </fieldset>
+</form>
+
+</body>
+</html>

@@ -16,6 +16,7 @@ public class Posts {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "createdAt", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date createdAt;
+
 @ManyToOne
 
 private Users users;
