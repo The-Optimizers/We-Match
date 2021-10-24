@@ -12,6 +12,7 @@ import java.util.Set;
 @Entity
 public class Users  implements UserDetails {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(unique = true)
@@ -22,13 +23,24 @@ public class Users  implements UserDetails {
 
     @OneToMany(mappedBy = "users")
     List<Posts>posts;
-
     public List<Posts> getPosts() {
         return posts;
     }
 
     @OneToMany(mappedBy = "users")
     private List<Teams> teams;
+
+    public String getResetPasswordToken() {
+        return resetPasswordToken;
+    }
+
+    public void setResetPasswordToken(String resetPasswordToken) {
+        this.resetPasswordToken = resetPasswordToken;
+    }
+
+    @Column(name = "reset_password_token")
+    private String resetPasswordToken;
+
 
     public List<Teams> getTeams() {
         return teams;
@@ -88,22 +100,22 @@ public class Users  implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     public void setUsername(String username) {
