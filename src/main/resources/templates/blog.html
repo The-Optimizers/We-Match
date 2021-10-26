@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Single Post</title>
+</head>
+<body>
+<div>
+    <style>
+        input[type=text] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 1px solid #555;
+            outline: none;
+        }
+
+        input[type=text]:focus {
+            background-color: lightblue;
+        }
+        body{
+            background-color: darkgray;
+        }
+    </style>
+</div>
+
+
+<!--<p th:text="'Id => ' + ${blog.id}"></p>-->
+<!--<p th:text="'Author => ' + ${blog.appUser.username}"></p>-->
+<!--<p th:text="'Content => ' + ${blog.content}"></p>-->
+
+<ul th:each="blog: ${post}">
+    <li> Id <span th:text="${post.id}"></span></li>
+    <li> Author <span th:text="${post.users.username}"></span></li>
+    <li> Content <span th:text="${post.body}"></span></li>
+    <li> Created <span th:text="${post.createdAt}"></span></li>
+</ul>
+
+<h2>Comments:</h2>
+
+<!--Comments-->
+
+
+        <div class="well" th:each="comment : ${post.comments}">
+            <h3 th:text="${comment.body}">Body</h3>
+            <div th:text="'Created: ' + ${#dates.format(comment.createDate, 'dd-MMM-yyyy')} + ' by '">
+                Created by
+                    <div><a th:text="${comment.user.username}" th:href="@{'/v2/blog/' + ${comment.user.username}}">User</a>
+            </div>
+        </div>
+
+            
+
+        </div>
+</body>
+
+</html>

@@ -13,6 +13,7 @@ import java.util.Set;
 public class Users  implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
     @Column(unique = true)
@@ -23,6 +24,7 @@ public class Users  implements UserDetails {
 
     @OneToMany(mappedBy = "users")
     List<Posts>posts;
+
     public List<Posts> getPosts() {
         return posts;
     }
@@ -79,6 +81,8 @@ public class Users  implements UserDetails {
     public void setPosts(List<Posts> posts) {
         this.posts = posts;
     }
+
+
 
     public Users(String username, String email, String password, String imageUrl) {
         this.username = username;
@@ -158,4 +162,5 @@ public class Users  implements UserDetails {
     public Long getId() {
         return id;
     }
+
 }
