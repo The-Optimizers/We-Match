@@ -46,12 +46,12 @@ public String greet(Model model, Principal principal){
         return "redirect:http://localhost:4444/api/users";
     }
     @PostMapping("/signup")
-    public String signUpNewUser(@RequestBody Users appUser) {
+    public String signUpNewUser(@ModelAttribute Users appUser) {
         appUser.setPassword(BCrypt.hashpw(appUser.getPassword(), BCrypt.gensalt())); // we have encrypted the user password
         applicationUserRepository.save(appUser);
 
         // we should then show the post creation page
-        return ("redirect:/api/login");
+        return ( "redirect:/api/login");
     }
 @GetMapping("/signup")
 public String showSignUpForm(){
