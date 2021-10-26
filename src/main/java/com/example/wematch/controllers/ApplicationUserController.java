@@ -1,8 +1,11 @@
 package com.example.wematch.controllers;
 
 
+import com.example.wematch.models.Role;
 import com.example.wematch.models.Users;
+import com.example.wematch.repositories.RoleRepository;
 import com.example.wematch.repositories.UserRepository;
+import com.example.wematch.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,11 +29,19 @@ public class ApplicationUserController {
 
     @Autowired
     UserRepository applicationUserRepository;
+    @Autowired
+    UserServices services;
+    @Autowired
+    RoleRepository roleRepository;
 @GetMapping("/hello")
 public String greet(Model model, Principal principal){
 
     UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     Users applicationUser = applicationUserRepository.findByUsername(userDetails.getUsername());
+
+
+
+
     model.addAttribute("user", applicationUser);
 
     return "greet";
@@ -46,15 +57,16 @@ public String greet(Model model, Principal principal){
         return "redirect:http://localhost:4444/api/users";
     }
     @PostMapping("/signup")
-    public String signUpNewUser(@RequestBody Users appUser) {
+    public String signUpNewUser(@ModelAttribute Users appUser) {
         appUser.setPassword(BCrypt.hashpw(appUser.getPassword(), BCrypt.gensalt())); // we have encrypted the user password
         applicationUserRepository.save(appUser);
-
         // we should then show the post creation page
+        services.registerDefaultUser(appUser);
         return ("redirect:/api/login");
     }
 @GetMapping("/signup")
 public String showSignUpForm(){
+
         return ("signup");
 }
 
@@ -69,6 +81,13 @@ public String showSignUpForm(){
     public String getProfile(Model model) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Users applicationUser = applicationUserRepository.findByUsername(userDetails.getUsername());
+
+
+        Role roleUser = roleRepository.findByName("User");
+        System.out.println("this is when login user"+roleUser);
+
+//        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        Users applicationUser = applicationUserRepository.findByUsername(userDetails.getUsername());
 
         if (applicationUser == null)
             return "redirect:http://localhost:8085/api/users";
