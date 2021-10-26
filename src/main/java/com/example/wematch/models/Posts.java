@@ -5,10 +5,13 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Posts {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id", nullable = false)
     private Long id;
 
     private String body;
@@ -17,11 +20,25 @@ public class Posts {
     @Column(name = "createdAt", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date createdAt;
 
-@ManyToOne
 
-private Users users;
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "users_id" )
+   private Users users;
+
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
+    private List<Comment> comments;
+
     public Posts() {
 
+    }
+
+
+    public Posts(String body, Users users, Date createdAt) {
+        this.body = body;
+        this.users = users;
+        this.createdAt = createdAt;
     }
 
     public Date getCreatedAt() {
@@ -51,5 +68,21 @@ private Users users;
 
     public Long getId() {
         return id;
+    }
+
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }
