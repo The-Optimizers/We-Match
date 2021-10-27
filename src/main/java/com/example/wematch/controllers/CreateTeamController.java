@@ -117,7 +117,7 @@ return ("create_team");
 //services.registerDefaultUser(applicationUser);
 
 
-        return ("create_free_team");
+        return ("create_team");
     }
 
     @RequestMapping("/join/team")
