@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Albums</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<body>
+<ul class="Teams" th:each="team : ${teams}">
+
+    <div class="card" style="width: 18rem;" th:id="${team.getCardId()}">
+        <img class="card-img-top" th:src="${team.imageUrl}" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title" th:text="'Artist: ' + ${team.name}"></h5>
+            <p class="card-text" th:text="'Song Count: ' + ${team.time}"></p>
+            <p class="card-text" th:text="'Length: ' + ${team.info} +'sec'"></p>
+
+<div>
+<div th:switch="${#lists.contains(team.getUser(),principal)}">
+    <div th:case="${false}" >
+        <form method="post" th:action="@{'/join/team?id='+${team.id}+'&id2='+${principal.id}}">
+            <input type="hidden" name="id" th:value="${team.name}" />
+            <button
+
+                    class="btn btn-primary"
+                    style="background-color: blue; border-color: white"
+                    type="submit">Join</button>
+        </form>
+    </div>
+    <div  th:case="${true}">
+
+
+        <form method="post" th:action="@{'/leave/team?id='+${team.id}+'&id2='+${user_id}}">
+            <input type="hidden" name="id"  th:value="${team.name}" />
+
+            <button
+                    type="submit"
+                    class="btn btn-primary"
+                    style="background-color: red; border-color: white">Leave Team
+            </button>
+
+        </form>
+
+    </div>
+</div>
+
+
+</div>
+
+            <div th:if="${team.getCardId() == username}">
+
+            <form  th:if="${hi == true}" style="float:left;"th:action="${'/edit/team/'+ team.id}" method="get">
+
+                <button class="btn btn-info" style="width:50px;">⚒</button>
+
+            </form>
+            </div>
+
+        </div>
+        <div th:if="${team.getCardId() == username}">
+            <form  th:if="${hi == true}" method="post" th:action="${'/delete/team/'+ team.id}" >
+                <h1  >hello</h1>
+                <button style="width:50px;" class="btn btn-danger" type="submit">X</button>
+            </form>
+        </div>
+
+        <a href="/team/chat">join chat!</a>
+
+    </div>
+</ul>
+<ul class="Teams" th:each="team : ${teams2}">
+
+    <div class="card" style="width: 18rem;" th:id="${team.getCardId()}">
+        <img class="card-img-top" th:src="${team.imageUrl}" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title" th:text="'Artist: ' + ${team.name}"></h5>
+            <p class="card-text" th:text="'Song Count: ' + ${team.skills}"></p>
+            <p class="card-text" th:text="'Length: ' + ${team.info} +'sec'"></p>
+
+            <form method="post" th:action="@{'/join/team?id='+${team.id}+'&id2='+${user_id}}">
+
+                <button
+                    class="btn btn-primary"
+                    style="background-color: blue; border-color: white"
+                    type="submit">Join</button>
+            </form>
+            <form method="post" th:action="@{'/leave/team?id='+${team.id}+'&id2='+${user_id}}">
+                <button
+                        type="submit"
+                        class="btn btn-primary"
+                        style="background-color: red; border-color: white">Leave Team
+                </button>
+            </form>
+            <div th:if="${team.getCardId() == username}">
+
+                <form  th:if="${hi == true}" style="float:left;"th:action="${'/edit/team2/'+ team.id}" method="get">
+
+                    <button class="btn btn-info" style="width:50px;">⚒</button>
+
+                </form>
+            </div>
+
+        </div>
+        <div th:if="${team.getCardId() == username}">
+            <form  th:if="${hi == true}" method="post" th:action="${'/delete/team2/'+ team.id}" >
+                <h1  >hello</h1>
+                <button style="width:50px;" class="btn btn-danger" type="submit">X</button>
+            </form>
+        </div>
+
+        <a href="/team/chat">join chat!</a>
+
+    </div>
+</ul>
+</body>
+</html>

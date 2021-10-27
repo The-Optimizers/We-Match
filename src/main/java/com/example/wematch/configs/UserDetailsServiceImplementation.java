@@ -1,5 +1,6 @@
 package com.example.wematch.configs;
 
+import com.example.wematch.models.Users;
 import com.example.wematch.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,8 +17,15 @@ public class UserDetailsServiceImplementation implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-            return applicationUserRepository.findByUsername(username);
+//            return applicationUserRepository.findByUsername(username);
+        Users users = applicationUserRepository.findByUsername(username);
+
+        if (users == null) {
+            System.out.print("Username not found");
+            throw new UsernameNotFoundException((username + " not found"));
+        }
+        return users;
         }
 
-    }
+}
 
