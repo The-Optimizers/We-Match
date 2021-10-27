@@ -59,23 +59,14 @@ public String showSignUpForm(){
 }
 
 
+
+
     @GetMapping("/login")
     public String showLoginPage() {
         return "login";
     }
 
 
-    @GetMapping("/profile")
-    public String getProfile(Model model) {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Users applicationUser = applicationUserRepository.findByUsername(userDetails.getUsername());
-
-        if (applicationUser == null)
-            return "redirect:http://localhost:8085/api/users";
-
-        model.addAttribute("user", applicationUser);
-        return "";
-    }
 
 
 }
