@@ -1,0 +1,107 @@
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+
+$primary: #f5f4f6; //background
+$secondary: #28262c; //black
+$tertiary: #ac90d0; //light-purple
+$accent: #7f54b3; //purple
+$white: #fff;
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 50%;
+
+    @media only screen and (min-width: 37.5em) {
+        font-size: 56.25%;
+    }
+
+    @media only screen and (min-width: 56.25em) {
+        font-size: 62.5%;
+    }
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: $secondary;
+    background-color: $primary;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.card {
+    background: linear-gradient(to top left, $tertiary, $accent);
+    padding: 16rem 0 0;
+    max-width: 30rem;
+    border-radius: 1rem;
+    overflow: hidden;
+
+    transition: transform 500ms ease;
+
+    &__content {
+        padding: 2rem;
+        background: $white;
+
+        @media (hover) {
+            transform: translatey(30%);
+            transition: transform 500ms ease;
+
+            &:hover,
+            &:focus-within {
+                transform: translatey(0);
+            }
+
+            &:focus-within {
+                transition-duration: 0ms;
+            }
+        }
+    }
+
+    &__heading {
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 2rem;
+    }
+
+    &__body {
+        margin-bottom: 1.5rem;
+    }
+
+    &__btn {
+        cursor: pointer;
+        border: none;
+        border-radius: 0.5rem;
+        outline: none;
+        background: $tertiary;
+        color: $white;
+        padding: 1rem 2rem;
+        transition: ease-in 0.3s;
+
+        &:hover {
+            background: $accent;
+        }
+    }
+}
