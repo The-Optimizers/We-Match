@@ -196,7 +196,7 @@ model.addAttribute("hi",session);
 model.addAttribute("testValid",currentUser.teams);
 model.addAttribute("u",nameValue);
     System.out.println("from method ==>"+isValid(currentUser,teamsRepository.findAll()));
-    return "testTeams";
+    return "team_cards";
 }
 public Long index=0L;
     public Boolean isUserLoggedIn(Principal p){

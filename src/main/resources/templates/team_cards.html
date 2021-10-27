@@ -32,7 +32,7 @@
             <div>
                 <div th:switch="${#lists.contains(team.getUser(),principal)}">
                     <div th:case="${false}">
-                        <form method="post" th:action="@{'/join/team?id='+${team.id}+'&id2='+${principal.id}}">
+                        <form method="post" th:action="@{'/join/team?id='+${team.id}+'&id2='+${principal.id}}"> // join
                             <input type="hidden" name="id" th:value="${team.name}"/>
                             <button
 
@@ -45,7 +45,7 @@
                     <div th:case="${true}">
 
 
-                        <form method="post" th:action="@{'/leave/team?id='+${team.id}+'&id2='+${user_id}}">
+                        <form method="post" th:action="@{'/leave/team?id='+${team.id}+'&id2='+${user_id}}"> // leave team
                             <input type="hidden" name="id" th:value="${team.name}"/>
 
                             <button
@@ -62,7 +62,7 @@
 
             </div>
 
-            <div th:if="${team.getCardId() == username}">
+            <div th:if="${team.getCardId() == username}"> // edit team
 
                 <form th:if="${hi == true}" style="float:left;" th:action="${'/edit/team/'+ team.id}" method="get">
 
@@ -72,14 +72,14 @@
             </div>
 
         </div>
-        <div th:if="${team.getCardId() == username}">
+        <div th:if="${team.getCardId() == username}"> /// delete team 1
             <form th:if="${hi == true}" method="post" th:action="${'/delete/team/'+ team.id}">
                 <h1>hello</h1>
                 <button style="width:50px;" class="btn btn-danger" type="submit">X</button>
             </form>
         </div>
 
-        <a href="/team/chat">join chat!</a>
+        <a href="/team/chat">join chat!</a> // chat link
 
     </div>
 </ul>
@@ -92,7 +92,7 @@
             <p class="card-text" th:text="'Song Count: ' + ${team.skills}"></p>
             <p class="card-text" th:text="'Length: ' + ${team.info} +'sec'"></p>
 
-            <form method="post" th:action="@{'/join/team?id='+${team.id}+'&id2='+${user_id}}">
+            <form method="post" th:action="@{'/join/team?id='+${team.id}+'&id2='+${user_id}}"> /// join team
 
                 <button
                         class="btn btn-primary"
@@ -100,14 +100,14 @@
                         type="submit">Join
                 </button>
             </form>
-            <form method="post" th:action="@{'/leave/team?id='+${team.id}+'&id2='+${user_id}}">
+            <form method="post" th:action="@{'/leave/team?id='+${team.id}+'&id2='+${user_id}}"> // leave team
                 <button
                         type="submit"
                         class="btn btn-primary"
                         style="background-color: red; border-color: white">Leave Team
                 </button>
             </form>
-            <div th:if="${team.getCardId() == username}">
+            <div th:if="${team.getCardId() == username}">  //edit team 2
 
                 <form th:if="${hi == true}" style="float:left;" th:action="${'/edit/team2/'+ team.id}" method="get">
 
@@ -117,7 +117,7 @@
             </div>
 
         </div>
-        <div th:if="${team.getCardId() == username}">
+        <div th:if="${team.getCardId() == username}"> //delete team 2
             <form th:if="${hi == true}" method="post" th:action="${'/delete/team2/'+ team.id}">
                 <h1>hello</h1>
                 <button style="width:50px;" class="btn btn-danger" type="submit">X</button>
