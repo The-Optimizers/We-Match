@@ -27,9 +27,9 @@
 <div class="profile-flex-container">
   <div style="text-align:center;" class="postWithPTag" th:if="${!(currentUser.posts.isEmpty())}">
     <p>Your Posts</p>
-    <div class="individualPost" th:each="post : ${currentUser.posts}">
-      <b><p th:text="${post.getBody()}"> </p></b>
-      <p><b> Posted on: <span th:text="${post.getCreatedAt()}"> </span></b></p>
+    <div class="individualPost" th:each="posts : ${currentUser.posts}">
+      <b><p th:text="${posts.getBody()}"> </p></b>
+      <p><b> Posted on: <span th:text="${posts.getCreatedAt()}"> </span></b></p>
       <hr>
     </div>
   </div>
