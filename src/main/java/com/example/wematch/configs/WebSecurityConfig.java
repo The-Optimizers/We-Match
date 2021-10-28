@@ -63,7 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .authorizeRequests()
                 //allow requests to all urls that match the pattern
-                .antMatchers("/", "/api/*", "*/login", "/*.css", "/*.js").permitAll()
+                .antMatchers("/", "/api/*", "*/login", "/*.css", "/*.js","/*.scss").permitAll()
                 .antMatchers(HttpMethod.GET, "/*.css").permitAll()
                 .antMatchers("/resources/**", "/static/**","/webjars/**","/css/**","/js/**","**/allImages/**","/images/**","/resources/allImages/**","/allImages/**","/search/**","/src/main/resources/allImages/**" ).permitAll()                .antMatchers("/","*/addPost","*/newpost").permitAll()
                 //anything else you must be logged in
@@ -71,7 +71,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/api/login")
-                .defaultSuccessUrl("/api/hello", true)
+                .defaultSuccessUrl("/api/profile", true)
                 .failureUrl("/login?error=true")
                 .and()
                 .logout()

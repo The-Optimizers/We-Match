@@ -1,8 +1,13 @@
 package com.example.wematch.models;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -14,6 +19,10 @@ public class Teams {
 
 @Column(updatable = false)
     private String cardId;
+
+
+
+
 
     public String getCardId() {
         return cardId;
@@ -47,8 +56,13 @@ public class Teams {
     @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
     @JoinColumn(name = "app_user_id", nullable = false,updatable = false)
     public Users users;
+
+
+
+
+
    /******************************************* joined teams *************************/
-    @ManyToMany(mappedBy = "team")
+   @ManyToMany(mappedBy = "team",cascade= { CascadeType.REMOVE })
     Set<Users> user = new HashSet<>();
 
 //    @Override
@@ -61,8 +75,7 @@ public class Teams {
         return name;
     }
 
-
-    public Set<Users> getUser() {
+public Set<Users> getUser() {
         return user;
     }
 
@@ -83,6 +96,7 @@ public class Teams {
         this.gender = gender;
         this.bio = bio;
     }
+
 
     @Column(unique = true)
     private String name;

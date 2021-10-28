@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title> SignUp Form</title>
     <link th:rel="stylesheet" th:href="@{/css/style.css}"/>
@@ -57,8 +57,8 @@
                     <input type="password" class="input" name="password" placeholder="Password"/>
                 </div>
             </div>
-            <a th:href="@{/forgot_password}">Forgot Password?</a>
-            <input type="submit" class="btn" value="Login" />
+            <a th:href="@{/api/login}">Already usr?</a>
+            <input type="submit" class="btn" value="Sign Up" />
         </form>
     </div>
 </div>
