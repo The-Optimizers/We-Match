@@ -4,59 +4,78 @@
     <meta charset="UTF-8">
     <title>Albums</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-</head>
+   <style>
+       #show {
+           display: none;
+       }
+
+       #show.visible {
+           display: block;
+       }
+   </style>
+    </head>
 <body>
-<ul class="Teams" th:each="team : ${teams}">
+
+
+<ul class="Teams" th:each="team : ${teams}"  >
+
 
     <div class="card" style="width: 18rem;" th:id="${team.getCardId()}">
-        <img class="card-img-top" th:src="${team.imageUrl}" alt="Card image cap">
+        <img class="card-img-top" th:src="${team.imageUrl}" alt="Card image cap"/>
         <div class="card-body">
+
+
+            <h1 th:text="${team.getUser.size()}"></h1>
+
+
+            <h6 th:text="${team.getUser().size() + '/'+team.getNumber()}"></h6>
+
+            </span>
+
             <h5 class="card-title" th:text="'Artist: ' + ${team.name}"></h5>
             <p class="card-text" th:text="'Song Count: ' + ${team.time}"></p>
             <p class="card-text" th:text="'Length: ' + ${team.info} +'sec'"></p>
 
-<div>
-<div th:switch="${#lists.contains(team.getUser(),principal)}">
-    <div th:case="${false}" >
-        <form method="post" th:action="@{'/join/team?id='+${team.id}+'&id2='+${principal.id}}">
-            <input type="hidden" name="id" th:value="${team.name}" />
-            <button
+            <span th:each="x:${team.getUser()}">
 
-                    class="btn btn-primary"
-                    style="background-color: blue; border-color: white"
-                    type="submit">Join</button>
-        </form>
-    </div>
-    <div  th:case="${true}">
+                        <div th:if="${x.username==username}">
 
 
-        <form method="post" th:action="@{'/leave/team?id='+${team.id}+'&id2='+${user_id}}">
-            <input type="hidden" name="id"  th:value="${team.name}" />
+                <form method="post" th:action="@{'/leave/team?id='+${team.id}+'&id2='+${user_id}}" >
 
-            <button
-                    type="submit"
-                    class="btn btn-primary"
-                    style="background-color: red; border-color: white">Leave Team
-            </button>
+                    <button
+                            th:id="${team.id}"
+                            th:name="${team.name}"
 
-        </form>
+                            type="submit"
+                    >Leave Team
 
-    </div>
-</div>
+                    </button>
+
+                </form>
+            </div>
 
 
-</div>
+            </span>
+            <form method="post"  th:action="@{'/join/team?id='+${team.id}+'&id2='+${user_id}}">
+
+                    <button
+                            th:name="${team.name}"
+                            type="submit"
+
+
+                    >Join</button>
+                </form>
+
+            <div>
 
             <div th:if="${team.getCardId() == username}">
 
-            <form  th:if="${hi == true}" style="float:left;"th:action="${'/edit/team/'+ team.id}" method="get">
+                <form  th:if="${hi == true}" style="float:left;"th:action="${'/edit/team/'+ team.id}" method="get">
 
-                <button class="btn btn-info" style="width:50px;">⚒</button>
+                    <button class="btn btn-info" style="width:50px;">⚒</button>
 
-            </form>
+                </form>
             </div>
 
         </div>
@@ -70,7 +89,27 @@
         <a href="/team/chat">join chat!</a>
 
     </div>
+
+
+
+
+
+    </div>
+    <!--    th:if="${isValid == true}"-->
+
+
 </ul>
+
+<script>
+    function toggleText(){
+        var x = document.getElementById("Myid");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+</script>
 <ul class="Teams" th:each="team : ${teams2}">
 
     <div class="card" style="width: 18rem;" th:id="${team.getCardId()}">
@@ -80,20 +119,40 @@
             <p class="card-text" th:text="'Song Count: ' + ${team.skills}"></p>
             <p class="card-text" th:text="'Length: ' + ${team.info} +'sec'"></p>
 
-            <form method="post" th:action="@{'/join/team?id='+${team.id}+'&id2='+${user_id}}">
+
+            <span th:each="x:${team.getUser()}">
+
+                        <div th:if="${x.username==username}">
+
+
+                <form method="post" th:action="@{'/leave/team?id='+${team.id}+'&id2='+${user_id}}" >
+
+                    <button
+                            th:id="${team.id}"
+                            th:name="${team.name}"
+
+                            type="submit"
+                    >Leave Team
+
+                    </button>
+
+                </form>
+            </div>
+
+
+            </span>
+            <form method="post"  th:action="@{'/join/team?id='+${team.id}+'&id2='+${user_id}}">
 
                 <button
-                    class="btn btn-primary"
-                    style="background-color: blue; border-color: white"
-                    type="submit">Join</button>
-            </form>
-            <form method="post" th:action="@{'/leave/team?id='+${team.id}+'&id2='+${user_id}}">
-                <button
+                        th:name="${team.name}"
                         type="submit"
-                        class="btn btn-primary"
-                        style="background-color: red; border-color: white">Leave Team
-                </button>
+
+
+                >Join</button>
             </form>
+
+            <div>
+
             <div th:if="${team.getCardId() == username}">
 
                 <form  th:if="${hi == true}" style="float:left;"th:action="${'/edit/team2/'+ team.id}" method="get">
@@ -115,5 +174,6 @@
 
     </div>
 </ul>
+
 </body>
 </html>

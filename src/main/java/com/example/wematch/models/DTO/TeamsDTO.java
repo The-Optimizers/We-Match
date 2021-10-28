@@ -26,6 +26,15 @@ private String user;
     private String gender;
     private String bio;
     private String cardId;
+private  Long isValid;
+
+    public Long getIsValid() {
+        return isValid;
+    }
+
+    public void setIsValid(Long isValid) {
+        this.isValid = isValid;
+    }
 
     public String getCardId() {
         return cardId;
@@ -127,6 +136,22 @@ private String user;
         this.gender = gender;
         this.bio = bio;
         this.user=user;
+    }
+
+    public TeamsDTO(String user, String name, int number, String time, String info, String teamType, String ageRange, String imageUrl, String country, String gender, String bio, String cardId, Long isValid) {
+        this.user = user;
+        this.name = name;
+        this.number = number;
+        this.time = time;
+        this.info = info;
+        this.teamType = teamType;
+        this.ageRange = ageRange;
+        this.imageUrl = imageUrl;
+        this.country = country;
+        this.gender = gender;
+        this.bio = bio;
+        this.cardId = cardId;
+        this.isValid = isValid;
     }
 
     public TeamsDTO() {
