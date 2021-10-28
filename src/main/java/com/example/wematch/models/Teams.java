@@ -1,15 +1,36 @@
 package com.example.wematch.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Teams {
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
+
+
+@Column(updatable = false)
+    private String cardId;
+
+
+
+
+
+    public String getCardId() {
+        return cardId;
+    }
+
+    public void setCardId(String cardId) {
+        this.cardId = cardId;
+    }
 
     public Teams() {
 
@@ -22,8 +43,7 @@ public class Teams {
     public Long getId() {
         return id;
     }
-@ManyToOne
-private Users users;
+
 
     public Users getUsers() {
         return users;
@@ -33,11 +53,56 @@ private Users users;
         this.users = users;
     }
 
+    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+    @JoinColumn(name = "app_user_id", nullable = false,updatable = false)
+    public Users users;
+
+
+
+
+
+   /******************************************* joined teams *************************/
+   @ManyToMany(mappedBy = "team",cascade= { CascadeType.REMOVE })
+    Set<Users> user = new HashSet<>();
+
+//    @Override
+//    public String toString() {
+//        return name;
+//    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+public Set<Users> getUser() {
+        return user;
+    }
+
+    public void setUser(Set<Users> user) {
+        this.user = user;
+    }
+    /********************************************** end joined *****************************/
+    public Teams(Users users, String name, int number, String time, String info, String teamType, String ageRange, String imageUrl, String country, String gender, String bio) {
+        this.users = users;
+        this.name = name;
+        this.number = number;
+        this.time = time;
+        this.info = info;
+        this.teamType = teamType;
+        this.ageRange = ageRange;
+        this.imageUrl = imageUrl;
+        this.country = country;
+        this.gender = gender;
+        this.bio = bio;
+    }
+
+
     @Column(unique = true)
     private String name;
 
     private int number;
-    private Date time;
+    private String time;
     private String info;
 
     public String getName() {
@@ -56,11 +121,11 @@ private Users users;
         this.number = number;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
@@ -120,18 +185,18 @@ private Users users;
         this.bio = bio;
     }
 
-    public Teams(String name, int number, Date time, String info, String teamType, String ageRange, String imageUrl, String country, String gender, String bio) {
-        this.name = name;
-        this.number = number;
-        this.time = time;
-        this.info = info;
-        this.teamType = teamType;
-        this.ageRange = ageRange;
-        this.imageUrl = imageUrl;
-        this.country = country;
-        this.gender = gender;
-        this.bio = bio;
-    }
+//    public Teams(String name, int number, String time, String info, String teamType, String ageRange, String imageUrl, String country, String gender, String bio) {
+//        this.name = name;
+//        this.number = number;
+//        this.time = time;
+//        this.info = info;
+//        this.teamType = teamType;
+//        this.ageRange = ageRange;
+//        this.imageUrl = imageUrl;
+//        this.country = country;
+//        this.gender = gender;
+//        this.bio = bio;
+//    }
 
     private String teamType;
     private String ageRange;
