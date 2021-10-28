@@ -1,0 +1,183 @@
+
+img{
+
+height:400px}
+@import url('https://fonts.googleapis.com/css?family=Open+Sans%7CPrata');
+ body {
+	 background-color: #fd9191;
+	 font-size: 62.5%;
+	 background-image: url("https://htmlcolorcodes.com/assets/images/html-color-codes-color-tutorials.jpg");
+         background-size: cover;
+
+
+}
+
+.hello {
+    width: 400px;
+    height: 100px;
+    position: relative;
+    color: beige;
+    font-size: 50px;
+    /* background-color: red; */
+    animation-name: example;
+    animation-duration: 10s;
+    animation-delay: 2s;
+}
+@keyframes example {
+  0%   {color:red; left:0px; top:0px;}
+  25%  {color:yellow; left:600px; top:0px;}
+  50%  {color:blue; left:400px; top:0px;}
+  75%  {color:green; left:200px; top:0px;}
+  100% {color:red; left:0px; top:0px;}
+}
+/* buttonn {
+	/*position: absolute;
+	 left: 50%;
+	 background-color: blue;
+	 border: none;
+	 border-radius: 4px;
+	 color: #black;
+	 font-size: 1.5rem;
+	 font-family: 'Prata';
+	 letter-spacing: 2px;
+	background:#e2d8cf;
+}*/
+.buttonn {
+    background-color: #181435;
+
+    height: 12%;
+    margin-top: 7%;
+    padding: 7%;
+    margin-left: 50%;
+    display: inline-block;
+    padding: 0.5em 2em;
+    font-family: 'Rancho', cursive;
+
+    color: #FFFFFF;
+
+    transition: all 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 500;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgb(255 255 255);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+ .desc {
+	 text-align: center;
+	 font-size: 1rem;
+	 color: #e6e6e6;
+	 font-family: 'Open Sans';
+	 position: absolute;
+	 left: 50%;
+	 top: 35%;
+	 transform: translate3d(-50%, -35%, 0);
+}
+ #button1 {
+	/* top: 50%;*/
+	 transform: translate3d(-50%, -50%, 0);
+}
+
+ /*.buttonn {
+     display: block;
+     width: 100px;
+     height: 30px;
+     cursor: pointer;
+     transition: box-shadow 0.1s linear;
+     margin-left: 33px;
+         background: #2d3b5c;
+         color: #d0f6f6;
+         margin-left: 50%;
+             margin-top: 30px;
+ }*/
+ .buttonn:hover {
+	 box-shadow: 0 10px 0 rgba(0, 0, 0, 0.2);
+	 background-color: #2cee08;;
+     box-shadow: 0px 15px 20px #F38181;
+     color: #fff;
+     transform:scale(1.15);
+}
+.allContent{
+    justify-content: space-evenly;
+        margin: 20px;
+        margin-top: 100px;
+        border-radius:20px
+
+}
+.card{
+width:500px;
+background: bisque;
+}
+.card-body{
+   background: #ebd9c8;
+
+
+}
+
+.edit button {
+    margin-left: 10px;
+    position: relative;
+   right: -259px;
+       top: 39px;
+    background-color: #7059a7;
+    height: 12%;
+    margin-top: 1%;
+    display: inline-block;
+    font-family: 'Rancho', cursive;
+    color: #2cee08;
+    transition: all 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgb(0 0 0 / 10%);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+.edit button:hover {
+background-color: #C06C84;
+box-shadow: 0px 15px 20px #F38181;
+color: #fff;
+transform:scale(1.15);
+
+}
+.delete button {
+    margin-left: 10px;
+    position: relative;
+       right: -259px;
+       top: 35px;
+    background-color: #7059a7;
+    height: 12%;
+    margin-top: 1%;
+    display: inline-block;
+    font-family: 'Rancho', cursive;
+    color:  #ff0000;
+    transition: all 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgb(0 0 0 / 10%);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+.delete button:hover {
+background-color: #C06C84;
+box-shadow: 0px 15px 20px #F38181;
+color: #fff;
+transform:scale(1.15);
+
+}
+.list-group {
+background:black;
+}
+.a-tag a{
+font-family: 'Zen Old Mincho', serif;
+text-decoration:none;
+font-size:25px
+}
