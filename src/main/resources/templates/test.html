@@ -1,10 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../lib/w3.css">
+<body class="w3-container">
+
+<div class="w3-dropdown-click">
+    <button onclick="myFunction()" class="w3-btn">Click me</button>
+    <div id="Demo" class="w3-dropdown-content w3-card-4 w3-animate-bottom">
+        <form autocomplete="off" action="#" th:action="@{/createComment}"
+              th:object="${comment}" method="post" role="form">
+
+            <h2 class="text-center">Write new comment</h2>
+
+            <div class="form-group">
+                <label th:if="${#fields.hasErrors('body')}" th:errors="*{body}"
+                       class="alert alert-danger"></label>
+                <label>
+           <textarea th:field="*{body}"
+                     placeholder="Body" class="form-control input-lg"></textarea>
+                </label>
+            </div>
+
+            <input type="hidden" th:field="*{post}"/>
+            <input type="hidden" th:field="*{user}"/>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">Comment</button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<script>
+    function myFunction() {
+        var x = document.getElementById("Demo");
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+        } else {
+            x.className = x.className.replace(" w3-show", "");
+        }
+    }
+</script>
 
 </body>
 </html>
