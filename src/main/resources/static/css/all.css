@@ -4,10 +4,8 @@ img{
 height:400px}
 @import url('https://fonts.googleapis.com/css?family=Open+Sans%7CPrata');
  body {
-	 background-color: #fd9191;
+	 background-color: rgba(238, 137, 43, 0.36);
 	 font-size: 62.5%;
-	 background-image: url("https://htmlcolorcodes.com/assets/images/html-color-codes-color-tutorials.jpg");
-         background-size: cover;
 
 
 }

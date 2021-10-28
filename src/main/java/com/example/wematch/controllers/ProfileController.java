@@ -1,5 +1,6 @@
 package com.example.wematch.controllers;
 
+import com.example.wematch.models.Teams;
 import com.example.wematch.models.Users;
 import com.example.wematch.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
+import java.util.Set;
 
 
 @Controller
@@ -25,6 +27,8 @@ public class ProfileController {
 
     @Autowired
     UserRepository applicationUserRepository;
+
+
 
 
 //    @GetMapping("/profile")
@@ -42,12 +46,22 @@ public class ProfileController {
 
     @GetMapping("/profile")
     public String UserProfile(Principal principal , Model model) {
+        model.addAttribute("userImage",applicationUserRepository.findAll());
+
         if (applicationUserRepository != null) {
             model.addAttribute("userData", principal.getName());
             model.addAttribute("allUserData", applicationUserRepository.findByUsername(principal.getName()));
         } else {
             model.addAttribute("userData", "No user");
             model.addAttribute("allUserData", new Users());
+        }
+        try {
+            model.addAttribute("userData", principal.getName());
+            Users user = applicationUserRepository.findByUsername(principal.getName());
+            Set<Teams> userFollow = user.getTeam();
+            model.addAttribute("Allfollowing", userFollow);
+        } catch (NullPointerException e) {
+            model.addAttribute("userData", "");
         }
         return "profile";
     }

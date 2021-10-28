@@ -67,7 +67,7 @@ public int counter=0;
         applicationUserRepository.save(user);
         teamsRepository.save(newTeam);
 
-        return ("redirect:/create/team");
+        return ("redirect:/allTeams");
     }
 
     @GetMapping("/create/team")
@@ -190,6 +190,7 @@ public boolean y=true;
         model.addAttribute("user_id", currentUser.getId());
         model.addAttribute("isValid", check);
         model.addAttribute("testValid", currentUser.teams);
+
         model.addAttribute("y", y);
         System.out.println("from method ==>" + isValid(currentUser, teamsRepository.findAll()));
         return "team_cards";

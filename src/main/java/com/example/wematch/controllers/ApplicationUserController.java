@@ -80,25 +80,25 @@ public String showSignUpForm( ){
     }
 
 
-
-    @GetMapping("/profile")
-    public String getProfile(Model model) {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Users applicationUser = applicationUserRepository.findByUsername(userDetails.getUsername());
-
-
-        Role roleUser = roleRepository.findByName("User");
-        System.out.println("this is when login user"+roleUser);
-
+//
+//    @GetMapping("/profile")
+//    public String getProfile(Model model) {
 //        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //        Users applicationUser = applicationUserRepository.findByUsername(userDetails.getUsername());
-
-        if (applicationUser == null)
-            return "redirect:http://localhost:8085/api/users";
-
-        model.addAttribute("user", applicationUser);
-        return "";
-    }
+//
+//
+//        Role roleUser = roleRepository.findByName("User");
+//        System.out.println("this is when login user"+roleUser);
+//
+////        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+////        Users applicationUser = applicationUserRepository.findByUsername(userDetails.getUsername());
+//
+//        if (applicationUser == null)
+//            return "redirect:http://localhost:8085/api/users";
+//
+//        model.addAttribute("user", applicationUser);
+//        return "";
+//    }
 
 
 }
