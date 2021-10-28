@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Albums</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <link th:rel="stylesheet" th:href="@{/css/all.css}"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho&display=swap" rel="stylesheet">
+    <link th:rel="stylesheet" th:href="@{/css/header.css}"/>
+    <link th:rel="stylesheet" th:href="@{/css/footer.css}"/>
+<style>
+    #footer {
+        position: fixed;
+        padding: 10px 10px 0px 10px;
+        bottom: 0;
+        width: 100%;
+        background-color: #333333;
+        text:white;
+    }
+</style>
+</head>
+<body>
+<header class="topnav" id="myTopnav">
+    <a href="#home"><img class="logo"  src="https://i.ibb.co/1qcFrqp/logo.png" alt="we match logo"></a>
+    <div class="navlist" id="navlist" >
+        <a class="cursor0" th:href="@{'/'}">&nbsp</a>
+        <a class="navoption active" th:href="@{'/'}">Home</a>
+        <a class="navoption" th:href="@{'/allTeams'}">Teams</a>
+        <a class="navoption" th:href="@{'/v2/blogs'}">Community</a>
+        <a class="navoption" th:href="@{'/api/aboutus'}">AboutUs</a>
+
+        <a href="javascript:void(0);" class="icon" id="hamburger">
+            <i class="fa fa-bars"></i>
+        </a>
+        <!-- Example single danger button -->
+        <span th:each="e:${uid}">
+               <div class="btn-group" style="margin-top: 35px; position: absolute;   z-index: 3;" >
+            <button type="button"  style="border-radius: 70px;" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img  class= "normal image" style="border-radius: 65px; height: 50px;" th:src="${e.imageUrl}" >
+
+            </button>
+            <div class="dropdown-menu">
+                     <a class="dropdown-item" th:href="@{'/api/profile'}">My Profile</a>
+                <a class="dropdown-item" th:href="@{'/logout'}">Logout</a>
+
+            </div>
+        </div>
+        </span>
+
+    </div>
+
+    </span>
+
+
+</header>
+<center>
+    <button class="buttonn" style="padding: 20px;"> <a th:href="@{'/create/team'}">create your TEAM!</a></button>
+
+</center>
+
+<div class="allContent">
+    <div class="hello">Hello Matchers</div>
+    <ul class="Teams" th:each="team : ${teams}" style="display: inline-block ;padding-bottom: 25px;">
+
+<div class="card" style="width: 27rem;"  th:id="${team.getCardId()}">
+  <img class="bd-placeholder-img card-img-top" width="100%" height="180" th:src="${team.imageUrl}" alt="Card image cap">
+
+    <div class="card-body">
+        <h5 class="card-title" style="font-family: 'Zen Old Mincho', serif; color:gray" th:text="'Name: ' + ${team.name}"></h5>
+        <p class="card-text"   style="font-family: 'Zen Old Mincho', serif; color:#078a60;" th:text="'Info: ' + ${team.info}"></p>
+    </div>
+    <ul class="list-group list-group-flush" >
+        <li class="list-group-item" style="background: #de6600; color:white; font-family: 'Rancho', cursive;"
+            th:text="'TeamType:'+ ${team.teamType}"></li>
+        <li class="list-group-item" style="background: #de6600; color:white;  font-family: 'Rancho', cursive"
+            th:text="'AgeRange: ' + ${team.ageRange}"></li>
+        <li  class="list-group-item" style="background:#de6600; color:white; font-family: 'Rancho', cursive"
+             th:text="'Country: ' + ${team.country}"></li>
+        <li class="list-group-item"  style="background: #de6600; color:white; font-family: 'Rancho', cursive"
+            th:text="'Gender: ' + ${team.gender}"></li>
+        <li class="list-group-item" style= "background: #de6600; color:white; font-family: 'Rancho', cursive"
+            th:text="'Bio: ' + ${team.bio}"></li>
+
+    </ul>
+    <div class="card-body">
+        <h6 th:text="${team.getUser().size() + '/'+team.getNumber()}"></h6>
+
+
+                <form method="post" th:action="@{'/join/team?id='+${team.id}+'&id2='+${user_id}}">
+                    <input type="hidden" name="id" th:value="${team.name}" />
+                    <button class="buttonn" id="button1">Join</button>
+
+                </form>
+
+    <span th:each="x:${team.getUser()}">
+
+                        <div th:if="${x.username==username}">
+
+
+                <form method="post" th:action="@{'/leave/team?id='+${team.id}+'&id2='+${user_id}}" >
+
+
+     <button
+             th:id="${team.id}"
+             th:name="${team.name}"
+             type="submit"
+             style="background-color: red;"
+
+                    class="buttonn" >Leave</button>
+
+                </form>
+            </div>
+
+
+            </span>
+</div>
+
+
+
+    <div th:if="${team.getCardId() == username }" class="edit" style="float: left;">
+
+        <form  th:if="${hi == true}" style="float:left;"th:action="${'/edit/team/'+ team.id}" method="get">
+
+            <button class="" id="1">Update</button>
+
+        </form>
+    </div>
+
+
+    <div th:if="${team.getCardId() == username}" class="delete">
+        <form  th:if="${hi == true}" method="post" th:action="${'/delete/team/'+ team.id}" >
+
+            <button class="" id="2">Delete</button>
+        </form>
+    </div>
+
+<div class="a-tag">
+    <a href="/team/chat">join chat!</a>
+</div>
+</div>
+
+
+</ul>
+</div>
+
+
+
+
+
+
+<div class="allContent">
+
+    <ul class="Teams" th:each="team : ${teams2}" style="display: inline-block; padding-bottom: 25px;">
+
+        <div class="card" style="width: 27 rem;"  th:id="${team.getCardId()}">
+            <img class="bd-placeholder-img card-img-top" width="100%" height="180" th:src="${team.imageUrl}" alt="Card image cap">
+
+            <div class="card-body">
+                <h5 class="card-title" style="font-family: 'Zen Old Mincho', serif; color:gray" th:text="'Time Name: ' + ${team.name}"></h5>
+                <p class="card-text"   style="font-family: 'Zen Old Mincho', serif; color:#078a60;" th:text="'Info: ' + ${team.info}"></p>
+            </div>
+            <ul class="list-group list-group-flush" >
+                <li class="list-group-item" style="background: #de6600; color:white; font-family: 'Rancho', cursive;"
+                    th:text="'TeamType:'+ ${team.teamType}"></li>
+                <li class="list-group-item" style="background: #de6600; color:white;  font-family: 'Rancho', cursive"
+                    th:text="'AgeRange: ' + ${team.ageRange}"></li>
+
+                <li class="list-group-item"  style="background: #de6600; color:white; font-family: 'Rancho', cursive"
+                    th:text="'Gender: ' + ${team.gender}"></li>
+                <li class="list-group-item" style= "background: #de6600; color:white; font-family: 'Rancho', cursive"
+                    th:text="'Bio: ' + ${team.bio}"></li>
+                <li class="list-group-item" style= "background: #de6600; color:white; font-family: 'Rancho', cursive"
+                    th:text="'Max Number: ' + ${team.number}"></li>
+
+            </ul>
+
+            <div class="card-body">
+
+
+                        <form method="post" th:action="@{'/join/team?id='+${team.id}+'&id2='+${user_id}}">
+                            <input type="hidden" name="id" th:value="${team.name}" />
+                            <button class="buttonn" id="button11">Join</button>
+                        </form>
+                <div th:if="${team.getCardId() == username}">
+
+
+
+
+                        <form method="post" th:action="@{'/leave/team?id='+${team.id}+'&id2='+${user_id}}">
+                            <input type="hidden" name="id"  th:value="${team.name}" />
+
+                            <button
+                                    type="submit"
+                                    class="btn btn-primary"
+                                    style="background-color: red; border-color: white">Leave Team
+                            </button>
+
+                        </form>
+
+
+                    </div>
+
+                    <div th:if="${team.getCardId() == username }" class="edit">
+
+
+                        <form  th:if="${hi == true}" style="float:left;"th:action="${'/edit/team2/'+ team.id}" method="get">
+
+                            <button class="" id="but">Update</button>
+
+                        </form>
+                    </div>
+
+
+                    <div th:if="${team.getCardId() == username}" class="delete">
+                        <form  th:if="${hi == true}" method="post" th:action="${'/delete/team2/'+ team.id}" >
+
+                            <button class="" id="butt">Delete</button>
+                        </form>
+                    </div>
+
+                    <div class="a-tag">
+                        <a href="/team/chat">join chat!</a>
+                    </div>
+
+            </div>
+        </div>
+
+    </ul>
+</div>
+
+</body>
+<div class="footer-basic">
+    <footer id="footer">
+        <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Home</a></li>
+            <li class="list-inline-item"><a href="#">Services</a></li>
+            <li class="list-inline-item"><a href="#">About</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+        </ul>
+        <p class="copyright">WE MATCH © 2021</p>
+    </footer>
+</div>
+</html>

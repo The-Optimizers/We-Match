@@ -1,62 +1,258 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8">
-  <title>Profile Page</title>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link href="/style.css" rel="stylesheet"/>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="post.css">
+    <link th:rel="stylesheet" th:href="@{/css/profile.css}"/>
+
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+
+<style>
+
+    h1 {
+        font-size: 36px;
+        border-bottom: 4px solid black;
+    }
+    h1, h2 {
+        text-transform: uppercase;
+        display: inline-block;
+        font-weight: 800;
+    }
+    h2 {
+        font-size: 27px;
+        padding: 14px 0px;
+        color: #fffebb;
+        border-bottom: 4px solid #fffebb;
+    }
+    #img {
+        display: block;
+        margin: 0 auto;
+        width: 480px;
+    }
+
+    footer {
+        text-align: center;
+        padding: 18px 0;
+        clear: both;
+    }
+    nav {
+        font-size: 24px;
+        float: right;
+    }
+    nav a {
+        text-decoration: none;
+        color: black;
+        margin: 13px 30px;
+        display: inline-block;
+    }
+    #div {
+        font-size: 20px;
+        width: 46%;
+        display: inline-block;
+        padding: 2%;
+    }
+    #footer {
+        position: fixed;
+        padding: 10px 10px 0px 10px;
+        bottom: 0;
+        width: 100%;
+    }
+
+    .hero {
+        width: 100%;
+        display: block;
+        margin: 0;
+    }
+
+    .logo{
+        height: 100px;
+        float: left;
+        padding: 9px;
+        padding-left: 3%;
+        padding-right: 3%;
+    }
+</style>
 </head>
-<body class="myprofileBody">
 
 
-<div class="middleDivs">
-  <img th:src="${currentUser.imageUrl}" style="width: 150px;">
-  <div class="aboutMe">
-    <p><b> First Name: <span th:text="${currentUser.firstName} "></span></b></p>
-    <p><b>Last Name: <span th:text="${currentUser.lastName} "></span></b></p>
-    <p><b>Date of Birth: <span th:text="${currentUser.dateOfBirth} "></span></b></p>
-    <p><b>Biography: <span th:text="${currentUser.bio} "></span></b></p>
-    <form  th:if="${!sessionStatus && !followerStatus} " action="/individualUser" method="GET" >
-      <button style=" margin-bottom: 15px; background-color: #4CAF50; color: white;" name="username" type="submit" th:value="${currentUser.username}">Follow</button>
-    </form>
-  </div>
+<body>
+
+<header id="header" style="background-color: #333333; text:white;">
+    <nav>
+        <a th:href="@{'/'}">&nbsp</a>
+        <a th:href="@{'/'}">Home</a>
+        <a  th:href="@{'/allTeams'}">Teams</a>
+        <a th:href="@{'/v2/blogs'}">Community</a>
+        <a th:href="@{'/api/aboutus'}">AboutUs</a>
+    </nav>
+
+    <div id="div" class="hero">
+        <a th:href="@{'/'}"><img class="logo"  src="https://i.ibb.co/1qcFrqp/logo.png" alt="we match logo"></a>
+
+    </div>
+</header>
+
+
+
+<div class="container">
+    <div class="profile-header">
+        <div class="profile-img">
+            <img th:src="${allUserData.imageUrl}"  alt="Profile Image">
+<!--            <img  src="../img/Ghadeer.png" width="200" alt="Profile Image">-->
+        </div>
+        <div class="profile-nav-info">
+            <h3 class="user-name h3" th:text="${allUserData.username}"></h3>
+
+
+        </div>
+        <div class="profile-option">
+            <div class="notification">
+                <i class="fa fa-bell"></i>
+                <span class="alert-message">3</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="main-bd">
+        <div class="left-side">
+            <div class="profile-side">
+                <!--                <p class="mobile-no"><i class="fa fa-phone"></i> +23470xxxxx700</p>-->
+                <p class="user-mail"><i class="fa fa-envelope" th:text="${allUserData.email}"></i></p>
+                <div class="user-bio">
+                    <h3>Bio</h3>
+                    <p class="bio">
+                           </p>
+                </div>
+                <div class="profile-btn">
+                        <a class="createbtn" id="Create-post" th:href="@{'/create/team'}" ><i class="fa fa-plus"></i> Create Team</a>
+
+                    <!--                    <button class="chatbtn" id="chatBtn"><i class="fa fa-comment"></i> Chat</button>-->
+
+                </div>
+                <div class="user-rating">
+                    <!--                    <h3 class="rating">4.5</h3>-->
+                    <div class="rate">
+                        <div class="star-outer">
+                            <div class="star-inner">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                        </div>
+                        <!--                        <span class="no-of-user-rate"><span>123</span>&nbsp;&nbsp;reviews</span>-->
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="right-side">
+
+            <div class="nav">
+                <ul>
+                    <li onclick="tabs(0)" class="user-post active">Posts</li>
+                    <li onclick="tabs(1)" class="user-review">Created Teams</li>
+                    <li onclick="tabs(2)" class="user-setting"> Joined Teams</li>
+                </ul>
+            </div>
+            <div class="profile-body">
+                <div class="profile-posts tab">
+                    <h1 class="h1">Your Post</h1>
+                    <p></p>
+                </div>
+                <div class="profile-reviews tab">
+                    <h1>
+                        joined teams
+                    </h1>
+
+                    <div style="width: 18rem;" th:each="follower:${Allfollowing}">
+                    <div>
+                        <h6  th:text="${follower.name}"></h6>
+                        <p  th:text="${follower.number}"></p>
+                        <hr>
+
+                    </div>
+                </div>
+                </div>
+                <div class="profile-settings tab">
+                    <div class="account-setting">
+                        <h1>Acount Setting</h1>
+                        <p</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<hr>
 
-<div class="profile-flex-container">
-  <div style="text-align:center;" class="postWithPTag" th:if="${!(currentUser.posts.isEmpty())}">
-    <p>Your Posts</p>
-    <div class="individualPost" th:each="posts : ${currentUser.posts}">
-      <b><p th:text="${posts.getBody()}"> </p></b>
-      <p><b> Posted on: <span th:text="${posts.getCreatedAt()}"> </span></b></p>
-      <hr>
-    </div>
-  </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-  <div class="follwersWithPTag">
-    <p style = "text-align: center;">Followers </p>
-    <div  th:each="follower: ${currentUser.followers}">
-      <div class="individualFollowerFollowing">
-        <a th:href="@{'/users/' + ${follower.getId()}}"><img th:src="${follower.imageUrl}" style="width:50px;"></a>
-        <span th:text="${follower.username}"></span>
-      </div>
-    </div>
-  </div>
+<script>
 
 
-  <div class="follwingWithPTag">
-    <p style = "text-align: center;">Following: </p>
-    <div th:each="following: ${currentUser.following}">
-      <div class="individualFollowerFollowing">
-        <a th:href="@{'/users/' + ${following.getId()}}"><img th:src="${following.imageUrl}" style="width:50px;"></a>
-        <!--                    <img th:src="${following.imageUrl}" style="width:50px;">-->
-        <span th:text="${following.username}"></span>
-      </div>
-    </div>
-  </div>
+    $(".nav ul li").click(function() {
+    $(this)
+    .addClass("active")
+    .siblings()
+    .removeClass("active");
+    });
+
+    const tabBtn = document.querySelectorAll(".nav ul li");
+    const tab = document.querySelectorAll(".tab");
+
+    function tabs(panelIndex) {
+    tab.forEach(function(node) {
+    node.style.display = "none";
+    });
+    tab[panelIndex].style.display = "block";
+    }
+    tabs(0);
+
+    let bio = document.querySelector(".bio");
+    const bioMore = document.querySelector("#see-more-bio");
+    const bioLength = bio.innerText.length;
+
+    function bioText() {
+    bio.oldText = bio.innerText;
+
+    bio.innerText = bio.innerText.substring(0, 100) + "...";
+    bio.innerHTML += `<span onclick='addLength()' id='see-more-bio'>See More</span>`;
+    }
+    //        console.log(bio.innerText)
+
+    bioText();
+
+    function addLength() {
+    bio.innerText = bio.oldText;
+    bio.innerHTML +=
+    "&nbsp;" + `<span onclick='bioText()' id='see-less-bio'>See Less</span>`;
+    document.getElementById("see-less-bio").addEventListener("click", () => {
+    document.getElementById("see-less-bio").style.display = "none";
+    });
+    }
+    if (document.querySelector(".alert-message").innerText > 9) {
+    document.querySelector(".alert-message").style.fontSize = ".7rem";
+    }
+
+
+
+</script>
+
+<div style="background-color: #333333; text:white;">
+    <footer id="footer"> © 2021 WE Match </footer>
+
 </div>
-
 
 </body>
+
 </html>
+
+

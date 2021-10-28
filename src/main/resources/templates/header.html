@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+    <link th:rel="stylesheet" th:href="@{/css/header.css}"/>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link th:rel="stylesheet" th:href="@{/css/aboutSite.css}"/>
+    <link th:rel="stylesheet" th:href="@{/css/footer.css}"/>
+
+</head>
+<body>
+<header class="topnav" id="myTopnav">
+    <a th:href="@{'/'}"><img class="logo"  src="https://i.ibb.co/1qcFrqp/logo.png" alt="we match logo"></a>
+    <div class="navlist" id="navlist" >
+        <a class="cursor0" href="#home">&nbsp</a>
+        <a class="navoption active" href="#home">Home</a>
+        <a class="navoption" th:href="${'/allTeams'}">Teams</a>
+        <a class="navoption" th:href="${'/v2/blogs'}">Community</a>
+        <a class="navoption" th:href="${'/api/aboutus'}">AboutUs</a>
+
+        <a href="javascript:void(0);" class="icon" id="hamburger">
+            <i class="fa fa-bars"></i>
+        </a>
+        <!-- Example single danger button -->
+        <span th:if="${isUserLoggedIn == true}" th:each="e:${userImage}">
+               <div class="btn-group" style="margin-top: 35px; position: absolute;   z-index: 3;
+" >
+            <button type="button"  style="border-radius: 70px;" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img  class= "normal image" style="border-radius: 65px; height: 50px;" th:src="${e.imageUrl}" >
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" th:href="@{'/api/profile'}">My Profile</a>
+                <a class="dropdown-item" th:href="@{'/logout'}">Logout</a>
+
+            </div>
+        </div>
+        </span>
+
+    </div>
+    <span th:if="${isUserLoggedIn != true}">
+               <div class="btn-group" style="margin-top: 35px; position: absolute;   z-index: 3;
+" >
+            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Sign Up
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" th:href="${'/api/signup'}">Sign up</a>
+                <a class="dropdown-item" th:href="${'/api/login'}">Log In</a>
+            </div>
+        </div>
+        </div>
+        </span>
+        </span>
+
+
+</header>
+<div class="div div-header">
+    <section class="sec sec-header">
+        <h1>Hello, <strong><span style="color: red;" th:text="${username}"></span></strong> <span id="cursor">|</span></h1>
+        <hr class="col-xs-12 d-none d-sm-block" style="background-color: white; width: 90%; height: 2px; border-radius: 3px">
+        <div class="presentation">
+
+            <section class="half-header-r d-none d-sm-none d-md-block">
+                <p class="line1">&#91;&nbsp;&ldquo;Welcome to We-Match&rdquo;,<span class="cursor1">_</span></p>
+
+                <p class="line2">&nbsp;&nbsp;&ldquo;Are you looking for Team?&rdquo;,<span class="cursor2">_</span></p>
+                <p class="line3">&nbsp;&nbsp;&ldquo; go and gather your TEAM!&rdquo;&nbsp;&#93;<span class="cursor3">_</span></p>
+                <p class="line4">><span class="cursor4">_</span></p>
+            </section>
+        </div>
+    </section>
+</div>
+<div class="blog-card">
+    <div class="meta">
+        <div class="photo" style="background-image: url(https://www.building-products.com/wp-content/uploads/2020/05/preview16.jpg)"></div>
+        <ul class="details">
+            <li class="author"><a href="#">We-Match</a></li>
+
+        </ul>
+    </div>
+    <div class="description">
+        <h1>Find Appropriate Your Team</h1>
+        <h2>Opening a door to the future</h2>
+<h5 style="padding-top: 20px;">
+
+    you can create and search for team that you need for your reasons in addition to chat with then inside we-match site
+
+
+    "It is literally true that you can succeed best and quickest by helping others to succeed."
+</h5>
+    </div>
+</div>
+<div class="blog-card alt">
+    <div class="meta">
+        <div class="photo" style="background-image: url(https://media.swncdn.com/cms/CCOM/67100-gettyimages-oatawa-puzzle.800w.tn.jpg)"></div>
+        <ul class="details">
+            <li class="author"><a href="#">We-Match</a></li>
+
+        </ul>
+    </div>
+    <div class="description">
+        <h1>Social Connect</h1>
+        <h2>it's important for team relation</h2>
+        <h5 style="padding-top: 20px;">
+
+            you can create and search for team that you need for your reasons in addition to chat with then inside we-match site
+
+
+            "It is literally true that you can succeed best and quickest by helping others to succeed."
+        </h5>
+    </div>
+</div>
+<div class="footer-basic">
+    <footer>
+        <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Home</a></li>
+            <li class="list-inline-item"><a href="#">Services</a></li>
+            <li class="list-inline-item"><a href="#">About</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+        </ul>
+        <p class="copyright">WE MATCH © 2021</p>
+    </footer>
+</div>
+<script type="text/javascript" th:src="@{/static/js/header.js} "></script>
+
+</body>
+</html>

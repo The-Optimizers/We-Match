@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>create new team</title>
+</head>
+<body>
+
+<div>
+
+    /**
+    * name
+    * number
+    * time
+    * info
+    * team type
+    * age range
+    * image
+    * country
+    * gender
+    * bio
+    * */
+    <!-- action is the path to our POST action, method = post -->
+    <form action="/create/team2" method="post">
+        <!-- boring html inputs! the "name" matches the @RequestParam's on the controller -->
+        <p>Team name</p><input type="text" name="name" /></br>
+        <p>max number</p><input type="number" name="number"/></br>
+        <p>Info</p><input type="text" name="info"/></br>
+        <p>team type</p><input type="text" name="teamType"/></br>
+        <p>age range</p><input type="text" name="ageRange"/></br>
+
+        <p>Image Url</p><input type="text" name="imageUrl"/></br>
+
+        <input type="radio" name="gender" value="male" > Male<br>
+        <input type="radio" name="gender" value="female"> Female<br>
+        <input type="radio" name="gender" value="other"> Other
+        <p>Skills</p><input type="text" name="skills" placeholder="write skills write , between each skill"/></br>
+        <p>Bio</p><input type="textarea" name="bio"/></br>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+</body>
+</html>

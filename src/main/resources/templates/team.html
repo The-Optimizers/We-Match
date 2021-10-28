@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Single Post</title>
+</head>
+<body>
+
+<!--<p th:text="'Id => ' + ${blog.id}"></p>-->
+<!--<p th:text="'Author => ' + ${blog.appUser.username}"></p>-->
+<!--<p th:text="'Content => ' + ${blog.content}"></p>-->
+
+<ul th:each="team: ${authorTeam}">
+    <p> Id <span th:text="${team.id}"></span></p>
+    <p> name <span th:text="${team.getName()}"></span></p>
+    <p> number <span th:text="${team.getNumber()}"></span></p>
+    <img th:src="${team.imageUrl}">
+</ul>
+
+</body>
+</html>
