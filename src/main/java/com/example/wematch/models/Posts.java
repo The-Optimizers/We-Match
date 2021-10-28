@@ -22,6 +22,7 @@ public class Posts {
 
 
 
+
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "users_id" )
    private Users users;
@@ -29,6 +30,11 @@ public class Posts {
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<Comment> comments;
+
+private int likers =0 ;
+
+
+
 
     public Posts() {
 
@@ -85,4 +91,5 @@ public class Posts {
     public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
+
 }

@@ -19,11 +19,11 @@
         <h2 class="log">
             WE MATCH
         </h2>
-        <div class="create">
+        <div  class="create">
             <label class="btn btn-primary" for="create-post">Create</label>
             <label class="btn btn-primary" for="create-post"><a th:href="@{/}">Home</a></label>
             <div class="profile-photo">
-                <img th:src="${image}" >
+                <img th:src="${image}">
             </div>
         </div>
     </div>
@@ -176,25 +176,28 @@
 
             <!------------------- FEEDS --------------------->
             <div class="feeds">
-                <div th:each="blog:${postComment}" class="feed">
+                <!------------------- FEED 1 --------------------->
+                <div th:each="post:${blogs}" class="feed">
                     <div class="head">
                         <div class="user">
                             <div class="profile-photo">
-                                <img th:src="${postComment.users.imageUrl}">
+                                <img th:src="${post.users.imageUrl}">
                             </div>
                             <div class="ingo">
-                                <h3 th:text="${postComment.users.username}"></h3>
-                                <h5><span th:text="${postComment.createdAt}"></span></h5>
+                                <h3 th:text="${post.users.username}"></h3>
+                                <h5><span th:text="${createdAt}"></span></h5>
                             </div>
+
                         </div>
                         <span class="edit">
                                 <i class="uil uil-ellipsis-h"></i>
                             </span>
                     </div>
+
                     <br>
                     <br>
                     <div  class="caption">
-                        <h3><b th:text="${postComment.body}"></b> <span  class="harsh-tag">#lifestyle</span></h3>
+                        <h3><b th:text="${post.body}"></b> <span  class="harsh-tag">#lifestyle</span></h3>
                     </div>
                     <br>
                     <br>
@@ -202,30 +205,30 @@
                         <img src="https://7c3u0tqns0-flywheel.netdna-ssl.com/wp-content/uploads/2019/04/photo-1531206715517-5c0ba140b2b8-1024x683.jpeg">
                     </div>
 
-
                     <div class="action-buttons">
                         <div class="interaction-buttons">
                             <span>
-                            <form th:action="@{/delete/blog/{id}(id=${postComment.id})}" method="post" >
-                                <button  class="btn btn-primary" type="submit">Delete</button>
-                            </form>
-                            </span>
-                            <span>
-                            <a th:href="@{/edit/blog/{id}(id=${postComment.id})}" >
+                            <a th:href="@{/edit/blog/{id}(id=${post.id})}" >
                                 <button  class="btn btn-primary" type="submit">Edit</button>
                             </a>
                             </span>
                             <span>
-                                <a th:href="@{'/commentPost/{id}'(id=${postComment.id})}">
+                              <a th:href="@{'/commentPost/{id}'(id=${post.id})}">
                         <button type="button" class="btn btn-primary" th:text="Comment">Comment</button>
-                             </a>
+                    </a>
+                            </span>
+                            <span>
+                                <a>
+                            <form id="form" th:action="@{/delete/blog/{id}(id=${post.id})}" method="post" >
+                                <button id="deleteBtn"  class="btn btn-primary" type="submit">Delete</button>
+                            </form>
+                                </a>
                             </span>
                         </div>
                         <div class="bookmark">
                             <span><i class="uil uil-bookmark-full"></i></span>
                         </div>
                     </div>
-
                     <div class="liked-by">
                         <span><img th:src="@{/images/profile-10.jpg}"></span>
                         <span><img th:src="@{/images/profile-4.jpg}"></span>
@@ -234,17 +237,6 @@
                     </div>
 
                     <div class="comments text-muted">View all 277 comments</div>
-                    <h2>Comments:</h2>
-
-                    <!--Comments-->
-                    <div class="well" th:each="comment : ${postComment.comments}">
-                        <h3 th:text="${comment.body}">Body</h3>
-                        <div th:text="'Created: ' + ${#dates.format(comment.createDate, 'dd-MMM-yyyy')} + ' by '">
-                            Created by
-                        </div>
-                        <span th:text="${comment.user.username}">
-                        </span>
-                    </div>
                 </div>
                 <!---------------- END OF FEED ----------------->
                 <!------------------- FEED 2 --------------------->
@@ -386,153 +378,163 @@
                         <p><b>Lana Rose</b> Lorem ipsum dolor sit quisquam eius. <span class="harsh-tag">#lifestyle</span></p>
                     </div>
                     <div class="comments text-muted">View all 277 comments</div>
+
                 </div>
                 <!---------------- END OF FEED ----------------->
             </div>
             <!------------------------------- END OF FEEDS ------------------------------------>
         </div>
-    </div>
         <!--======================== END OF MIDDLE ==========================-->
-        <div class="right">
-            <div class="messages">
-                <div class="heading">
-                    <h4>Messages</h4><i class="uil uil-edit"></i>
-                </div>
-                <!------------ SEARCH BAR -------------->
-                <div class="search-bar">
-                    <i class="uil uil-search"></i>
-                    <input type="search" placeholder="Search messages" id="message-search">
-                </div>
-                <!------------ MESSAGES CATEGORY -------------->
-                <div class="category">
-                    <h6 class="active">Primary</h6>
-                    <h6>General</h6>
-                    <h6 class="message-requests">Requests(7)</h6>
-                </div>
-                <!------------ MESSAGE -------------->
-                <!----- MESSAGE ----->
-                <div class="message">
-                    <div class="profile-photo">
-                        <img th:src="@{/images/profile-2.jpg}">
-                    </div>
-                    <div class="message-body">
-                        <h5>Edem Quist</h5>
-                        <p class="text-muted">Just woke up bruh</p>
-                    </div>
-                </div>
-                <!----- MESSAGE ----->
-                <div class="message">
-                    <div class="profile-photo">
-                        <img th:src="@{/images/profile-3.jpg}">
-                        <div class="active"></div>
-                    </div>
-                    <div class="message-body">
-                        <h5>Franca Deila</h5>
-                        <p class="text-bold">Received bruh. Thanks!</p>
-                    </div>
-                </div>
-                <!----- MESSAGE ----->
-                <div class="message">
-                    <div class="profile-photo">
-                        <img th:src="@{/images/profile-4.jpg}">
-                    </div>
-                    <div class="message-body">
-                        <h5>Jane Doe</h5>
-                        <p class="text-bold">ok</p>
-                    </div>
-                </div>
-                <!----- MESSAGE ----->
-                <div class="message">
-                    <div class="profile-photo">
-                        <img th:src="@{/images/profile-5.jpg}">
-                    </div>
-                    <div class="message-body">
-                        <h5>Daniella Jackson</h5>
-                        <p class="text-bold">2 new messages</p>
-                    </div>
-                </div>
-                <!----- MESSAGE ----->
-                <div class="message">
-                    <div class="profile-photo">
-                        <img th:src="@{/images/profile-6.jpg}">
-                    </div>
-                    <div class="message-body">
-                        <h5>Juliet Makarey</h5>
-                        <p class="text-muted">lol u right</p>
-                    </div>
-                </div>
-                <!----- MESSAGE ----->
-                <div class="message">
-                    <div class="profile-photo">
-                        <img th:src="@{/images/profile-7.jpg}">
-                        <div class="active"></div>
-                    </div>
-                    <div class="message-body">
-                        <h5>Chantel Msiza</h5>
-                        <p class="text-bold">Birthday Tomorrow!</p>
-                    </div>
-                </div>
-            </div>
-            <!------------ END OF MESSAGES -------------->
 
 
-            <!------------ FRIEND REQUESTS -------------->
-            <div class="friend-requests">
-                <h4>Requests</h4>
-                <!----- REQUEST 1----->
-                <div class="request">
-                    <div class="info">
-                        <div class="profile-photo">
-                            <img th:src="@{/images/profile-8.jpg}">
-                        </div>
-                        <div>
-                            <h5>Hajia Bintu</h5>
-                            <p class="text-muted">8 mutual friends</p>
-                        </div>
-                    </div>
-                    <div class="action">
-                        <button class="btn btn-primary">Accept</button>
-                        <button class="btn">Accept</button>
-                    </div>
-                </div>
-                <!----- REQUEST 2----->
-                <div class="request">
-                    <div class="info">
-                        <div class="profile-photo">
-                            <img th:src="@{/images/profile-9.jpg}">
-                        </div>
-                        <div>
-                            <h5>Jackline Mensah</h5>
-                            <p class="text-muted">2 mutual friends</p>
-                        </div>
-                    </div>
-                    <div class="action">
-                        <button class="btn btn-primary">Accept</button>
-                        <button class="btn">Accept</button>
-                    </div>
-                </div>
-                <!----- REQUEST 3----->
-                <div class="request">
-                    <div class="info">
-                        <div class="profile-photo">
-                            <img th:src="@{/images/profile-10.jpg}">
-                        </div>
-                        <div>
-                            <h5>Jennifer Lawrence</h5>
-                            <p class="text-muted">19 mutual friends</p>
-                        </div>
-                    </div>
-                    <div class="action">
-                        <button class="btn btn-primary">Accept</button>
-                        <button class="btn">Accept</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!--======================== RIGHT ==========================-->
 
-        <!--====================== END OF RIGHT ==========================-->
+                </div>
+        <!--======================== RIGHT ==========================-->
+
+    <!--====================== END OF RIGHT ==========================-->
+    <div class="right">
+        <div class="messages">
+            <div class="heading">
+                <h4>Messages</h4><i class="uil uil-edit"></i>
+            </div>
+            <!------------ SEARCH BAR -------------->
+            <div class="search-bar">
+                <i class="uil uil-search"></i>
+                <input type="search" placeholder="Search messages" id="message-search">
+            </div>
+            <!------------ MESSAGES CATEGORY -------------->
+            <div class="category">
+                <h6 class="active">Primary</h6>
+                <h6>General</h6>
+                <h6 class="message-requests">Requests(7)</h6>
+            </div>
+            <!------------ MESSAGE -------------->
+            <!----- MESSAGE ----->
+            <div class="message">
+                <div class="profile-photo">
+                    <img th:src="@{/images/profile-2.jpg}">
+                </div>
+                <div class="message-body">
+                    <h5>Edem Quist</h5>
+                    <p class="text-muted">Just woke up bruh</p>
+                </div>
+            </div>
+            <!----- MESSAGE ----->
+            <div class="message">
+                <div class="profile-photo">
+                    <img th:src="@{/images/profile-3.jpg}">
+                    <div class="active"></div>
+                </div>
+                <div class="message-body">
+                    <h5>Franca Deila</h5>
+                    <p class="text-bold">Received bruh. Thanks!</p>
+                </div>
+            </div>
+            <!----- MESSAGE ----->
+            <div class="message">
+                <div class="profile-photo">
+                    <img th:src="@{/images/profile-4.jpg}">
+                </div>
+                <div class="message-body">
+                    <h5>Jane Doe</h5>
+                    <p class="text-bold">ok</p>
+                </div>
+            </div>
+            <!----- MESSAGE ----->
+            <div class="message">
+                <div class="profile-photo">
+                    <img th:src="@{/images/profile-5.jpg}">
+                </div>
+                <div class="message-body">
+                    <h5>Daniella Jackson</h5>
+                    <p class="text-bold">2 new messages</p>
+                </div>
+            </div>
+            <!----- MESSAGE ----->
+            <div class="message">
+                <div class="profile-photo">
+                    <img th:src="@{/images/profile-6.jpg}">
+                </div>
+                <div class="message-body">
+                    <h5>Juliet Makarey</h5>
+                    <p class="text-muted">lol u right</p>
+                </div>
+            </div>
+            <!----- MESSAGE ----->
+            <div class="message">
+                <div class="profile-photo">
+                    <img th:src="@{/images/profile-7.jpg}">
+                    <div class="active"></div>
+                </div>
+                <div class="message-body">
+                    <h5>Chantel Msiza</h5>
+                    <p class="text-bold">Birthday Tomorrow!</p>
+                </div>
+            </div>
+        </div>
+        <!------------ END OF MESSAGES -------------->
+
+
+        <!------------ FRIEND REQUESTS -------------->
+        <div class="friend-requests">
+            <h4>Requests</h4>
+            <!----- REQUEST 1----->
+            <div class="request">
+                <div class="info">
+                    <div class="profile-photo">
+                        <img th:src="@{/images/profile-8.jpg}">
+                    </div>
+                    <div>
+                        <h5>Hajia Bintu</h5>
+                        <p class="text-muted">8 mutual friends</p>
+                    </div>
+                </div>
+                <div class="action">
+                    <button class="btn btn-primary">Accept</button>
+                    <button class="btn">Accept</button>
+                </div>
+            </div>
+            <!----- REQUEST 2----->
+            <div class="request">
+                <div class="info">
+                    <div class="profile-photo">
+                        <img th:src="@{/images/profile-9.jpg}">
+                    </div>
+                    <div>
+                        <h5>Jackline Mensah</h5>
+                        <p class="text-muted">2 mutual friends</p>
+                    </div>
+                </div>
+                <div class="action">
+                    <button class="btn btn-primary">Accept</button>
+                    <button class="btn">Accept</button>
+                </div>
+            </div>
+            <!----- REQUEST 3----->
+            <div class="request">
+                <div class="info">
+                    <div class="profile-photo">
+                        <img th:src="@{/images/profile-10.jpg}">
+                    </div>
+                    <div>
+                        <h5>Jennifer Lawrence</h5>
+                        <p class="text-muted">19 mutual friends</p>
+                    </div>
+                </div>
+                <div class="action">
+                    <button class="btn btn-primary">Accept</button>
+                    <button class="btn">Accept</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--======================== RIGHT ==========================-->
+
+    <!--====================== END OF RIGHT ==========================-->
+
 </main>
 
 <!--================================================ THEME CUSTOMIZATION =============================================-->

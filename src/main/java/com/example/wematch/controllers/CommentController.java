@@ -11,12 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.Date;
 import java.util.Optional;
 
 @Controller
@@ -31,17 +29,18 @@ public class CommentController {
     CommentRepository commentRepository;
 
     @RequestMapping(value = "/createComment", method = RequestMethod.POST)
-    public String createNewPost(@Validated Comment comment,
-                                BindingResult bindingResult) {
+    public String createNewPost(@Validated Comment comment, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return "commentForm";
 
         } else {
+
             commentRepository.save(comment);
             return "redirect:/v2/blog/" + comment.getPost().getId();
         }
     }
+
 
     @RequestMapping(value = "/commentPost/{id}", method = RequestMethod.GET)
     public String commentPostWithId(@PathVariable Long id,
@@ -54,11 +53,11 @@ public class CommentController {
             Optional<Users> user = Optional.ofNullable(userRepository.findByUsername(principal.getName()));
 
             if (user.isPresent()) {
-                Comment comment = new Comment();
-                comment.setUser(user.get());
-                comment.setPost(post.get());
+                Comment newComment = new Comment();
+                newComment.setUser(user.get());
+                newComment.setPost(post.get());
 
-                model.addAttribute("comment", comment);
+                model.addAttribute("newComment", newComment);
 
                 return "commentForm";
 
