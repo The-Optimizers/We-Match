@@ -1,5 +1,7 @@
 package com.example.wematch.models;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,6 +30,7 @@ public class Users  implements UserDetails {
     }
 //
 //    public List<Teams> getTeams() {
+//    public List<Teams> getTeams() {
 //        return teams;
 //    }
 //
@@ -35,7 +38,7 @@ public class Users  implements UserDetails {
 //        this.teams = teams;
 //    }
 
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "users",cascade= { CascadeType.REMOVE })
     public  List<Teams> teams;
 
 

@@ -7,6 +7,7 @@ import com.example.wematch.repositories.RoleRepository;
 import com.example.wematch.repositories.UserRepository;
 import com.example.wematch.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -65,9 +66,8 @@ public String greet(Model model, Principal principal){
         return ("redirect:/api/login");
     }
 @GetMapping("/signup")
-public String showSignUpForm(){
-
-        return ("signup");
+public String showSignUpForm( ){
+    return ("signup");
 }
 
 
