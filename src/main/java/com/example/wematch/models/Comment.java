@@ -21,6 +21,10 @@ public class Comment {
     @Column(name = "create_date", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date createDate;
 
+    public Comment() {
+
+    }
+
     @ManyToOne
     @JoinColumn(name = "posts_id", nullable = false)
     @NotNull
@@ -30,8 +34,6 @@ public class Comment {
     @JoinColumn(name = "users_id", nullable = false)
     @NotNull
     private Users user;
-
-
 
     public Long getId() {
         return id;

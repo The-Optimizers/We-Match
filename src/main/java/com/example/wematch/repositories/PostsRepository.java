@@ -12,4 +12,5 @@ import java.util.Optional;
 
 public interface PostsRepository extends JpaRepository<Posts, Long> {
     List<Posts> findAllByUsers_Username(String name);
+    List<Posts> findPostsById(Long id);
 }

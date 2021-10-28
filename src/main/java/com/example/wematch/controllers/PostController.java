@@ -37,26 +37,35 @@ public class PostController {
     @GetMapping("/v2/blogs")
     public String profile(@AuthenticationPrincipal Users user, Model model) {
         model.addAttribute("blogs", postsRepository.findAll());
+        model.addAttribute("users",userRepository.findAll());
         model.addAttribute("username", user.getUsername());
+        model.addAttribute("image", user.getImageUrl());
+        Users postInfo = userRepository.findByUsername((user.getUsername()));
+        model.addAttribute("posts" , postInfo );
         model.addAttribute("createdAt", new Date());
-        return "blogs";
+        return "test3";
     }
 
     @GetMapping("/v2/blog/{id}")
     public String getPostWithId (@PathVariable Long id,
                                  Principal principal,
-                                 Model model){
+                                 Model model ,@AuthenticationPrincipal Users user){
 
         Optional<Posts> optionalPost = postsRepository.findById(id);
+        model.addAttribute("users",userRepository.findAll());
+        model.addAttribute("username", principal.getName());
+        System.out.println(principal.getName());
+        System.out.println(user.getUsername());
+        model.addAttribute("image",user.getImageUrl() );
 
         if (optionalPost.isPresent()) {
             Posts post = optionalPost.get();
 
-            model.addAttribute("post", post);
+            model.addAttribute("postComment", post);
             if (isPrincipalOwnerOfPost(principal, post)) {
                 model.addAttribute("username", principal.getName());
             }
-            return "blog";
+            return "test";
 
         } else {
             return "error";
@@ -64,10 +73,11 @@ public class PostController {
     }
 
     @PostMapping("/v2/blogs")
-    public RedirectView createNewBlogPost(@AuthenticationPrincipal Users user, @ModelAttribute PostsDTO blogDTO) { // modelattribute when working with fomr data
+    public RedirectView createNewBlogPost(@AuthenticationPrincipal Users user, @ModelAttribute PostsDTO blogDTO ,@RequestParam String body) { // modelattribute when working with fomr data
 //        Users users = userRepository.findByUsername(blogDTO.getUser());
 //        Date date = blogDTO.setTimeStamp(new Date());
-        Posts newBlog = new Posts(blogDTO.getBody(), user, blogDTO.getTimeStamp());
+        Users userInfo = userRepository.findUsersByUsername((user.getUsername()));
+        Posts newBlog = new Posts(body, userInfo, blogDTO.getTimeStamp());
         postsRepository.save(newBlog);
         return new RedirectView("/v2/blogs");
     }
@@ -101,6 +111,15 @@ public class PostController {
         return "redirect:/v2/blogs";
 
     }
+    @GetMapping("/allUsers")
+    public String getUsers(@AuthenticationPrincipal Users user, Model model) {
+        model.addAttribute("username", user.getUsername());
+        model.addAttribute("Users", userRepository.findAll());
+        Users myApp = userRepository.findByUsername(user.getUsername());
+        model.addAttribute("blogs", postsRepository.findAll());
+
+            return "users";
+        }
 
 
 
