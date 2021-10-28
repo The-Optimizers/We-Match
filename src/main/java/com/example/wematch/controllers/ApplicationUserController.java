@@ -62,6 +62,7 @@ public String greet(Model model, Principal principal){
         appUser.setPassword(BCrypt.hashpw(appUser.getPassword(), BCrypt.gensalt())); // we have encrypted the user password
         applicationUserRepository.save(appUser);
         // we should then show the post creation page
+
         services.registerDefaultUser(appUser);
         return ("redirect:/api/login");
     }
@@ -71,10 +72,13 @@ public String showSignUpForm( ){
 }
 
 
+
+
     @GetMapping("/login")
     public String showLoginPage() {
         return "login";
     }
+
 
 
     @GetMapping("/profile")
