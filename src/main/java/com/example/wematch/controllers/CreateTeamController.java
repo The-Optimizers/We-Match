@@ -118,7 +118,7 @@ public int counter=0;
 //services.registerDefaultUser(applicationUser);
 
 
-        return ("create_free_team");
+        return ("create_team");
     }
 public boolean check=false;
     @Autowired
